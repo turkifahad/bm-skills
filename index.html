@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus — Consulting Model Planner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-display);
+      background-color: #f6f8fa;
+      color: #57606a;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Crisp fine-line borders like premium physical paper drafts */
+    .nexus-border {
+      border: 1px solid #e1e4e8;
+    }
+
+    /* Deep Dribbble soft-shadow elevation stack */
+    .nexus-card {
+      background: #ffffff;
+      border: 1px solid #e1e4e8;
+      box-shadow: 
+        0 1px 2px rgba(27, 31, 35, 0.04),
+        0 8px 24px rgba(27, 31, 35, 0.04);
+      border-radius: 16px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nexus-card:hover {
+      box-shadow: 
+        0 1px 3px rgba(27, 31, 35, 0.08),
+        0 16px 32px rgba(27, 31, 35, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* Subdued minimal custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #e1e4e8;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #d1d5da;
+    }
+
+    /* Range slider styled exactly to the clean Nexus layout values */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      background: #e1e4e8;
+      height: 4px;
+      border-radius: 9999px;
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #0969da;
+      border: 2px solid #ffffff;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(9, 105, 218, 0.3);
+      transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body class="h-full overflow-hidden flex flex-col bg-[#f6f8fa]">
+
+  <!-- Top Slim Editorial Header -->
+  <header class="h-16 px-10 flex items-center justify-between border-b border-[#e1e4e8] bg-white z-50 shrink-0">
+    <div class="flex items-center gap-6">
+      <div class="flex items-center gap-2.5">
+        <!-- Elegant, geometric, high-contrast black/white brand logo -->
+        <span class="h-6 w-6 bg-black text-white rounded-lg flex items-center justify-center font-extrabold text-xs tracking-tight shadow-md">N</span>
+        <h1 class="text-[#24292f] font-bold tracking-tight text-base">Nexus</h1>
+      </div>
+      <div class="h-4 w-px bg-[#e1e4e8]"></div>
+      <span class="text-xs text-[#57606a] font-semibold tracking-wide uppercase font-mono bg-[#f6f8fa] border border-[#e1e4e8] px-2 py-0.5 rounded">R&D Strategy Draft</span>
+    </div>
+    
+    <div class="flex items-center gap-6">
+      <div class="flex items-center gap-2">
+        <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="text-xs text-[#24292f] font-bold uppercase tracking-wider font-mono">WORKSPACE_STERILE_A</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- High-Fidelity Dribbble Workspace Grid -->
+  <main class="flex-1 flex overflow-hidden relative">
+
+    <!-- Elegant Editorial Controls Sidebar (Left Panel) -->
+    <aside class="w-[380px] border-r border-[#e1e4e8] bg-white flex flex-col z-40 shrink-0 overflow-y-auto p-10 space-y-10">
+      
+      <div class="space-y-2">
+        <h3 class="text-[#24292f] text-lg font-bold tracking-tight">Strategy Variables</h3>
+        <p class="text-xs text-[#57606a] leading-relaxed">Modify your pricing models, client retention scales, and operational burden below to dynamically recalculate cash flow margins.</p>
+      </div>
+
+      <div class="space-y-8">
+        
+        <!-- Parameter 1: Retainer pricing slider -->
+        <div class="space-y-3">
+          <div class="flex justify-between items-baseline">
+            <label class="text-sm font-semibold text-[#24292f] tracking-tight">Package Retainer Fee</label>
+            <span class="text-sm font-bold text-[#0969da] font-mono" id="valRetainerText">$8,000 / mo</span>
+          </div>
+          <input type="range" id="paramRetainer" min="2000" max="25000" step="500" value="8000" class="w-full">
+          <div class="flex justify-between text-[10px] text-[#57606a] font-mono font-medium">
+            <span>$2,000</span>
+            <span>$25,000</span>
+          </div>
+        </div>
+
+        <!-- Parameter 2: Active Retainers -->
+        <div class="space-y-3">
+          <div class="flex justify-between items-baseline">
+            <label class="text-sm font-semibold text-[#24292f] tracking-tight">Client Account Queue</label>
+            <span class="text-sm font-bold text-[#0969da] font-mono" id="valClientsText">4 Accounts</span>
+          </div>
+          <input type="range" id="paramClients" min="1" max="25" step="1" value="4" class="w-full">
+          <div class="flex justify-between text-[10px] text-[#57606a] font-mono font-medium">
+            <span>1 Account</span>
+            <span>25 Accounts</span>
+          </div>
+        </div>
+
+        <!-- Parameter 3: Fulfillment Hour Allotment -->
+        <div class="space-y-3">
+          <div class="flex justify-between items-baseline">
+            <label class="text-sm font-semibold text-[#24292f] tracking-tight">Client Delivery Hours</label>
+            <span class="text-sm font-bold text-[#24292f] font-mono" id="valHoursText">20 Hours / client</span>
+          </div>
+          <input type="range" id="paramHours" min="5" max="80" step="5" value="20" class="w-full">
+          <div class="flex justify-between text-[10px] text-[#57606a] font-mono font-medium">
+            <span>5 hrs</span>
+            <span>80 hrs</span>
+          </div>
+        </div>
+
+        <!-- Parameter 4: Project Support Delegation % -->
+        <div class="space-y-3">
+          <div class="flex justify-between items-baseline">
+            <label class="text-sm font-semibold text-[#24292f] tracking-tight">Fulfillment Delegation</label>
+            <span class="text-sm font-bold text-[#24292f] font-mono" id="valDelegateText">25%</span>
+          </div>
+          <input type="range" id="paramDelegate" min="0" max="75" step="5" value="25" class="w-full">
+          <div class="flex justify-between text-[10px] text-[#57606a] font-mono font-medium">
+            <span>0% (Solo)</span>
+            <span>75% (Delegated)</span>
+          </div>
+        </div>
+
+        <!-- Parameter 5: Core Overhead input -->
+        <div class="space-y-3">
+          <div class="flex justify-between items-baseline">
+            <label class="text-sm font-semibold text-[#24292f] tracking-tight">Operational Systems Overhead</label>
+            <span class="text-sm font-bold text-[#24292f] font-mono" id="valOverheadText">$450</span>
+          </div>
+          <input type="range" id="paramOverhead" min="0" max="5000" step="50" value="450" class="w-full">
+          <div class="flex justify-between text-[10px] text-[#57606a] font-mono font-medium">
+            <span>$0</span>
+            <span>$5,000</span>
+          </div>
+        </div>
+
+      </div>
+
+    </aside>
+
+    <!-- Air-Beated High-Contrast Editorial Canvas (Right Panel) -->
+    <div class="flex-1 overflow-y-auto p-12 space-y-12 bg-[#f6f8fa]">
+      
+      <!-- Primary Core High-Capacity Performance Dashboard -->
+      <div class="space-y-4">
+        <h3 class="text-xs font-bold text-[#24292f] uppercase tracking-wider font-mono">Performance Metric Fields</h3>
+        
+        <div class="grid grid-cols-3 gap-8">
+          
+          <!-- Metric 1: Monthly Top Line -->
+          <div class="nexus-card p-8 space-y-4">
+            <div class="flex justify-between items-center text-[#57606a]">
+              <span class="text-[10px] font-mono uppercase tracking-wider block">01 / Gross Monthly Inflow</span>
+              <div class="h-2 w-2 rounded-full bg-[#0969da]"></div>
+            </div>
+            <div class="space-y-1">
+              <span class="text-4xl font-extrabold text-[#24292f] tracking-tight" id="calcInflow">$32,000</span>
+              <p class="text-xs text-[#57606a]" id="lblInflowSub">4 Active accounts @ $8k/mo</p>
+            </div>
+          </div>
+
+          <!-- Metric 2: Estimated Net Profit -->
+          <div class="nexus-card p-8 space-y-4">
+            <div class="flex justify-between items-center text-[#57606a]">
+              <span class="text-[10px] font-mono uppercase tracking-wider block">02 / Net Profit Margin</span>
+              <div class="h-2 w-2 rounded-full bg-emerald-500"></div>
+            </div>
+            <div class="space-y-1">
+              <span class="text-4xl font-extrabold text-emerald-600 tracking-tight" id="calcNetProfit">$23,550</span>
+              <p class="text-xs text-[#57606a]" id="lblNetSub">73.6% Operating Profit margin</p>
+            </div>
+          </div>
+
+          <!-- Metric 3: Total capacity burden -->
+          <div class="nexus-card p-8 space-y-4">
+            <div class="flex justify-between items-center text-[#57606a]">
+              <span class="text-[10px] font-mono uppercase tracking-wider block">03 / Capacity Burden</span>
+              <div class="h-2 w-2 rounded-full bg-amber-500"></div>
+            </div>
+            <div class="space-y-1">
+              <span class="text-4xl font-extrabold text-[#24292f] tracking-tight" id="calcTime">80 hrs / mo</span>
+              <p class="text-xs text-[#57606a]" id="lblTimeSub">Estimated delivery commitment</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Financial Diagnosis & Action Prescription -->
+      <div class="nexus-card p-8 space-y-6">
+        <div class="flex items-center gap-3">
+          <div class="h-3.5 w-3.5 bg-[#24292f] rounded-md flex items-center justify-center text-white"><i data-lucide="shield-check" class="h-2.5 w-2.5"></i></div>
+          <h3 class="text-xs uppercase font-mono tracking-wider font-bold text-[#24292f]">Consulting Model Strategy Assessment</h3>
+        </div>
+        <div class="h-px bg-[#e1e4e8]"></div>
+        
+        <div class="grid grid-cols-2 gap-12">
+          
+          <!-- Analytical feedback -->
+          <div class="space-y-6">
+            <div>
+              <h4 class="text-[#24292f] text-sm font-semibold mb-1">Effective Hourly Yield</h4>
+              <p class="text-xs text-[#57606a] leading-relaxed" id="diagnosisHourly">
+                By charging a high-ticket retainer of **$8,000** for **20 hours** of monthly commitment, your effective hourly yield per client is **$400.00**. This structural model protects your rate from standard commoditized labor traps.
+              </p>
+            </div>
+            <div>
+              <h4 class="text-[#24292f] text-sm font-semibold mb-1">Human Bandwidth Safeguard</h4>
+              <p class="text-xs text-[#57606a] leading-relaxed" id="diagnosisCapacity">
+                Working with **4 clients** consumes **80 hours/mo** of combined delivery time. With a delegated support layout set to **25%**, you are purchasing precious operational leverage, shielding your schedule from core deliveries.
+              </p>
+            </div>
+          </div>
+
+          <!-- Dynamic Action Items based on Math outputs -->
+          <div class="bg-[#f6f8fa] border border-[#e1e4e8] rounded-xl p-6.5 space-y-4">
+            <span class="text-[10px] font-mono text-[#57606a] uppercase tracking-widest block font-bold">Dynamic Prescriptions</span>
+            <ul class="space-y-3.5 text-xs text-[#57606a]" id="diagnosisActions">
+              <li class="flex items-start gap-2.5">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#24292f] mt-1.5 shrink-0"></span>
+                <span>Setup contract retainers using 30-day upfront automated invoicing.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#24292f] mt-1.5 shrink-0"></span>
+                <span>Initiate developer support delegation once active account queue exceeds 5 tiers.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    // Initialize icons
+    lucide.createIcons();
+
+    // DOM Controls mapping
+    const paramRetainer = document.getElementById('paramRetainer');
+    const paramClients = document.getElementById('paramClients');
+    const paramHours = document.getElementById('paramHours');
+    const paramDelegate = document.getElementById('paramDelegate');
+    const paramOverhead = document.getElementById('paramOverhead');
+
+    // Values labels
+    const valRetainerText = document.getElementById('valRetainerText');
+    const valClientsText = document.getElementById('valClientsText');
+    const valHoursText = document.getElementById('valHoursText');
+    const valDelegateText = document.getElementById('valDelegateText');
+    const valOverheadText = document.getElementById('valOverheadText');
+
+    // Math outputs
+    const calcInflow = document.getElementById('calcInflow');
+    const calcNetProfit = document.getElementById('calcNetProfit');
+    const calcTime = document.getElementById('calcTime');
+
+    // Description labels
+    const lblInflowSub = document.getElementById('lblInflowSub');
+    const lblNetSub = document.getElementById('lblNetSub');
+    const lblTimeSub = document.getElementById('lblTimeSub');
+
+    // Medical diagnosis cards
+    const diagnosisHourly = document.getElementById('diagnosisHourly');
+    const diagnosisCapacity = document.getElementById('diagnosisCapacity');
+    const diagnosisActions = document.getElementById('diagnosisActions');
+
+    // Add continuous input change listeners for true interactive feel
+    const inputs = [paramRetainer, paramClients, paramHours, paramDelegate, paramOverhead];
+    inputs.forEach(input => {
+      input.addEventListener('input', runCalculations);
+    });
+
+    function runCalculations() {
+      // Get current values
+      const retainer = parseFloat(paramRetainer.value);
+      const clients = parseInt(paramClients.value);
+      const hours = parseInt(paramHours.value);
+      const delegatePct = parseInt(paramDelegate.value);
+      const overhead = parseFloat(paramOverhead.value) || 0;
+
+      // Update control labels
+      valRetainerText.innerText = `$${retainer.toLocaleString()} / mo`;
+      valClientsText.innerText = `${clients} ${clients === 1 ? 'Client Account' : 'Client Accounts'}`;
+      valHoursText.innerText = `${hours} Hours / client`;
+      valDelegateText.innerText = `${delegatePct}%`;
+      valOverheadText.innerText = `$${overhead.toLocaleString()}`;
+
+      // 1. Calculate Gross Inflow
+      const monthlyInflow = retainer * clients;
+      calcInflow.innerText = `$${monthlyInflow.toLocaleString()}`;
+      lblInflowSub.innerText = `${clients} Active ${clients === 1 ? 'account' : 'accounts'} @ $${retainer.toLocaleString()}/mo`;
+
+      // 2. Calculate Total Capacity Hours
+      const deliveryHours = hours * clients;
+      calcTime.innerText = `${deliveryHours} hrs / mo`;
+      lblTimeSub.innerText = `Weekly commitment: ${(deliveryHours / 4).toFixed(1)} hrs / week`;
+
+      // 3. Calculate Direct Fulfillment Costs and Net Profit
+      const directFulfillmentCost = monthlyInflow * (delegatePct / 100);
+      const netProfit = monthlyInflow - directFulfillmentCost - overhead;
+      const profitMarginPct = monthlyInflow > 0 ? (netProfit / monthlyInflow) * 100 : 0;
+
+      calcNetProfit.innerText = `$${netProfit.toLocaleString()}`;
+      lblNetSub.innerText = `${profitMarginPct.toFixed(1)}% Operating profit margin ratio`;
+
+      // 4. Calculate Effective Yields
+      const clientTotalHours = hours;
+      const hoursRate = clientTotalHours > 0 ? retainer / clientTotalHours : 0;
+      
+      // Update Assessment Text with neutral, factual narrative
+      diagnosisHourly.innerHTML = `
+        By charging a high-ticket retainer of **$${retainer.toLocaleString()}** for **${hours} hours** of monthly commitment, your effective hourly yield per client is **$${hoursRate.toFixed(2)}**. This structural model protects your rate from standard commoditized labor traps.
+      `;
+
+      if (deliveryHours > 165) {
+        diagnosisCapacity.innerHTML = `
+          ⚠️ **Burnout Risk Warning**: Under current configurations, you are running up against a **${deliveryHours} hours/mo** physical burden. Selling raw individual labor at this scale limits scale capability. Consider increasing retainer size, dropping hours per account, or increasing delegated fulfillment.
+        `;
+      } else {
+        diagnosisCapacity.innerHTML = `
+          **Schedule Protection**: Working with **${clients} clients** consumes **${deliveryHours} hours/mo** of combined delivery time. With a delegated support layout set to **${delegatePct}%**, you are purchasing precious operational leverage, shielding your schedule from core deliveries.
+        `;
+      }
+
+      // Re-architect tactical steps based on parameters
+      let stepsHtml = '';
+      if (retainer < 4000) {
+        stepsHtml += `
+          <li class="flex items-start gap-2.5">
+            <span class="h-1.5 w-1.5 rounded-full bg-[#24292f] mt-1.5 shrink-0"></span>
+            <span>**Package Rate Optimization**: Your fee is below optimal standard benchmarks. Increase retainer thresholds to protect your personal execution margin.</span>
+          </li>
+        `;
+      } else {
+        stepsHtml += `
+          <li class="flex items-start gap-2.5">
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0"></span>
+            <span>**Elite Margins Secured**: Your premium retainer model is highly optimized. Draft retainer contracts via upfront monthly invoicing terms.</span>
+          </li>
+        `;
+      }
+
+      if (delegatePct === 0) {
+        stepsHtml += `
+          <li class="flex items-start gap-2.5">
+            <span class="h-1.5 w-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0"></span>
+            <span>**Productization Leverage**: Introduce delegated support or pre-configured technical templates once your accounts exceed 4 client retainers.</span>
+          </li>
+        `;
+      } else {
+        stepsHtml += `
+          <li class="flex items-start gap-2.5">
+            <span class="h-1.5 w-1.5 rounded-full bg-[#24292f] mt-1.5 shrink-0"></span>
+            <span>Establish a clear queue of qualified support resources to scale out production workloads.</span>
+          </li>
+        `;
+      }
+
+      stepsHtml += `
+        <li class="flex items-start gap-2.5">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#24292f] mt-1.5 shrink-0"></span>
+          <span>Deploy automated recurring billing agreements to eliminate invoice chasing.</span>
+        </li>
+      `;
+
+      diagnosisActions.innerHTML = stepsHtml;
+    }
+
+    // Run initial execution cycle
+    runCalculations();
+  </script>
+</body>
+</html>
